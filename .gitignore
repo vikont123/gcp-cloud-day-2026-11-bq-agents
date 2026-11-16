@@ -1,0 +1,20 @@
+# GCP Service Account Key (never commit!)
+gcp-key.json
+service-account.json
+credentials.json
+*-[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]*.json
+.env
+
+# Python & Node
+.venv/
+__pycache__/
+*.pyc
+data/
+frontend/node_modules/
+frontend/dist/
+.DS_Store
+
+# Local presenter notes & unrelated drafts (excluded from GitHub)
+how-ru.md
+MEDIUM_ARTICLE.md
+demo_concept_en.md

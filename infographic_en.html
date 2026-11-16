@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Infographic: an agent that learns from its own data</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .surface { background: var(--card, #ffffff); border: 1px solid var(--border, #e2e7ef); }
+    .muted { color: var(--muted-foreground, #5a6476); }
+    .hair { border: 1px solid var(--border, #e2e7ef); }
+    .step { flex: none; width: 26px; height: 26px; border-radius: 9999px; color: #fff; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+    .ico { width: 22px; height: 22px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .ico-c { width: 22px; height: 22px; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .chip { display: inline-flex; align-items: center; gap: 6px; border-radius: 9999px; padding: 5px 14px; font-size: 14px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size: 0.92em; }
+    .seg + .seg { border-left: 2px solid var(--card, #ffffff); }
+  </style>
+</head>
+<body class="antialiased" style="background: var(--background, #f3f5f9); color: var(--foreground, #111827);">
+<div id="poster" style="width: 1200px; margin: 0 auto; padding: 32px 0 40px;">
+
+  <!-- ============ HEADER ============ -->
+  <header class="surface rounded-2xl overflow-hidden">
+    <div class="flex h-2">
+      <div class="flex-1" style="background:#4285F4"></div>
+      <div class="flex-1" style="background:#EA4335"></div>
+      <div class="flex-1" style="background:#FBBC04"></div>
+      <div class="flex-1" style="background:#34A853"></div>
+    </div>
+    <div class="px-10 py-8">
+      <div class="text-sm font-semibold tracking-wider uppercase muted">Google Cloud Day · demo concept</div>
+      <h1 class="mt-2 text-5xl font-bold leading-tight">An agent that learns from its own data</h1>
+      <div class="mt-2 text-2xl font-semibold">
+        <span style="color:#4285F4">BigQuery teaches</span><span class="muted"> · </span><span style="color:#1E8E3E">AlloyDB remembers</span>
+      </div>
+      <p class="mt-4 text-lg leading-relaxed muted" style="max-width: 1000px">
+        Everything the agent does is saved in BigQuery. Every few minutes, BigQuery finds the agent's mistakes
+        and what they cost the business. Then the agent gets better instructions from AlloyDB.
+      </p>
+      <div class="mt-5 flex flex-wrap gap-3">
+        <span class="chip font-semibold" style="background:rgba(66,133,244,.13)">Logging: 1 line of code</span>
+        <span class="chip font-semibold" style="background:rgba(161,66,244,.13)">Gets better every 2–3 minutes</span>
+        <span class="chip font-semibold" style="background:rgba(52,168,83,.15)">No model retraining, no redeploy</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ HERO: THE CYCLE ============ -->
+  <section class="surface rounded-2xl mt-6 px-8 py-7">
+    <div class="flex items-baseline justify-between">
+      <h2 class="text-2xl font-bold">How it works</h2>
+      <div class="text-sm muted">One improvement cycle, clockwise</div>
+    </div>
+
+    <div class="mt-6 grid" style="grid-template-columns: 1fr 220px 1fr; grid-template-rows: auto 150px auto;">
+
+      <!-- (1,1) Support agent -->
+      <div class="rounded-xl p-5 flex flex-col" style="background:rgba(249,171,0,.09); border:1.5px solid rgba(249,171,0,.65)">
+        <div class="flex items-center gap-3">
+          <div class="h-11 w-11 rounded-xl flex items-center justify-center" style="background:#F9AB00">
+            <svg class="ico" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="13" y2="13"/></svg>
+          </div>
+          <div>
+            <div class="text-lg font-bold">Support agent</div>
+            <div class="text-sm muted">ADK · Cloud Run</div>
+          </div>
+        </div>
+        <p class="mt-4 leading-snug">Helps shop customers with orders, refunds and policies. Reads its instructions from AlloyDB on every turn.</p>
+        <div class="mt-4 space-y-2">
+          <div class="flex">
+            <div class="rounded-2xl px-3 py-2 text-sm leading-snug" style="background:rgba(127,127,127,.13); border-bottom-left-radius:4px; max-width:85%"><span class="font-semibold">Customer:</span> Please refund order <span class="mono">ORD-10482</span></div>
+          </div>
+          <div class="flex justify-end">
+            <div class="rounded-2xl px-3 py-2 text-sm leading-snug" style="background:rgba(249,171,0,.24); border-bottom-right-radius:4px; max-width:85%"><span class="font-semibold">Agent v1:</span> Done! Your €89 refund is on its way.</div>
+          </div>
+          <div class="flex justify-end">
+            <span class="chip text-xs font-semibold text-white" style="background:#EA4335; padding:3px 10px">Policy broken: the order is 45 days old, the limit is 30</span>
+          </div>
+        </div>
+        <div class="mt-4">
+          <div class="text-xs font-semibold uppercase tracking-wider muted">Tools on AlloyDB</div>
+          <div class="mt-2 flex flex-wrap gap-2">
+            <span class="chip" style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace; font-size:12px; padding:3px 10px; background:rgba(127,127,127,.12)">find_orders_by_email</span>
+            <span class="chip" style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace; font-size:12px; padding:3px 10px; background:rgba(127,127,127,.12)">get_order</span>
+            <span class="chip" style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace; font-size:12px; padding:3px 10px; background:rgba(127,127,127,.12)">issue_refund</span>
+            <span class="chip" style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace; font-size:12px; padding:3px 10px; background:rgba(127,127,127,.12)">search_policies</span>
+          </div>
+        </div>
+        <div class="mt-auto pt-4"><div class="chip text-sm" style="border:1.5px dashed rgba(249,171,0,.85)">Traffic: simulated customers, 10–20 chats per minute</div></div>
+      </div>
+
+      <!-- (1,2) arrow: agent -> BigQuery -->
+      <div class="flex flex-col items-center justify-center px-3">
+        <div class="text-sm font-semibold text-center leading-tight">BigQuery Agent Analytics plugin</div>
+        <svg width="200" height="22" viewBox="0 0 200 22" class="my-2"><line x1="4" y1="11" x2="182" y2="11" stroke="currentColor" stroke-opacity=".45" stroke-width="2.5"/><path d="M180 4 L196 11 L180 18 Z" fill="currentColor" fill-opacity=".45"/></svg>
+        <div class="text-xs muted text-center leading-snug">1 line of code<br>data arrives in seconds</div>
+      </div>
+
+      <!-- (1,3) BigQuery -->
+      <div class="rounded-xl p-5" style="background:rgba(66,133,244,.08); border:1.5px solid rgba(66,133,244,.55)">
+        <div class="flex items-center gap-3">
+          <div class="h-11 w-11 rounded-xl flex items-center justify-center" style="background:#4285F4">
+            <svg class="ico" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/><line x1="8" y1="13" x2="8" y2="11"/><line x1="10.5" y1="13" x2="10.5" y2="8.5"/><line x1="13" y1="13" x2="13" y2="10"/></svg>
+          </div>
+          <div>
+            <div class="text-lg font-bold">BigQuery</div>
+            <div class="text-sm font-semibold" style="color:#4285F4">where the agent learns</div>
+          </div>
+        </div>
+        <ol class="mt-4 space-y-3">
+          <li class="flex gap-3"><span class="step" style="background:#4285F4">1</span>
+            <div><div class="font-semibold">Measure</div><div class="text-sm muted leading-snug">SQL on <span class="mono">agent_events</span>: success, errors, turns, tokens</div></div></li>
+          <li class="flex gap-3"><span class="step" style="background:#4285F4">2</span>
+            <div><div class="font-semibold">Judge</div><div class="text-sm muted leading-snug"><span class="mono">AI.CLASSIFY</span> sorts chats by how they ended</div></div></li>
+          <li class="flex gap-3"><span class="step" style="background:#4285F4">3</span>
+            <div><div class="font-semibold">Find the most expensive problem</div><div class="text-sm muted leading-snug">Join with CSAT and with refunds from AlloyDB through <span class="mono">EXTERNAL_QUERY</span></div></div></li>
+        </ol>
+        <pre class="mt-4 rounded-lg px-3 py-2 leading-relaxed" style="background:rgba(66,133,244,.11); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace; font-size:12px; white-space:pre; overflow:hidden">SELECT AI.CLASSIFY(transcript,
+  ['resolved', 'policy_violation',
+   'tool_misuse', ...]) AS outcome
+FROM sessions</pre>
+      </div>
+
+      <!-- (2,1) arrow: AlloyDB -> agent (up) -->
+      <div class="flex items-center justify-center gap-4">
+        <svg width="22" height="140" viewBox="0 0 22 140"><line x1="11" y1="136" x2="11" y2="20" stroke="currentColor" stroke-opacity=".45" stroke-width="2.5"/><path d="M4 22 L11 5 L18 22 Z" fill="currentColor" fill-opacity=".45"/></svg>
+        <div class="leading-snug" style="max-width: 220px">
+          <div class="text-sm font-semibold">The agent uses the new instruction on the next turn</div>
+          <div class="text-xs muted mt-1">no redeploy</div>
+        </div>
+      </div>
+
+      <!-- (2,2) center -->
+      <div class="flex flex-col items-center justify-center text-center px-2">
+        <div class="h-14 w-14 rounded-full flex items-center justify-center" style="background:rgba(161,66,244,.13)">
+          <svg class="ico-c" viewBox="0 0 24 24" style="stroke:#A142F4; width:30px; height:30px"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+        </div>
+        <div class="mt-2 font-bold leading-tight">A cycle every 2–3&nbsp;minutes</div>
+        <div class="text-xs muted mt-1 leading-snug">the model is not retrained — its context gets better</div>
+      </div>
+
+      <!-- (2,3) arrow: BigQuery -> coach (down) -->
+      <div class="flex items-center justify-center gap-4">
+        <svg width="22" height="140" viewBox="0 0 22 140"><line x1="11" y1="4" x2="11" y2="120" stroke="currentColor" stroke-opacity=".45" stroke-width="2.5"/><path d="M4 118 L11 135 L18 118 Z" fill="currentColor" fill-opacity=".45"/></svg>
+        <div class="leading-snug" style="max-width: 220px">
+          <div class="text-sm font-semibold">The most expensive problem</div>
+          <div class="text-xs muted mt-1">plus 3–5 example chats</div>
+        </div>
+      </div>
+
+      <!-- (3,1) AlloyDB -->
+      <div class="rounded-xl p-5" style="background:rgba(52,168,83,.08); border:1.5px solid rgba(52,168,83,.55)">
+        <div class="flex items-center gap-3">
+          <div class="h-11 w-11 rounded-xl flex items-center justify-center" style="background:#1E8E3E">
+            <svg class="ico" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>
+          </div>
+          <div>
+            <div class="text-lg font-bold">AlloyDB</div>
+            <div class="text-sm font-semibold" style="color:#1E8E3E">where the agent remembers and acts</div>
+          </div>
+        </div>
+        <ol class="mt-4 space-y-3">
+          <li class="flex gap-3"><span class="step" style="background:#1E8E3E">6</span>
+            <div><div class="font-semibold">Publish</div><div class="text-sm muted leading-snug">The new instruction is live at once. Roll back with one&nbsp;click</div></div></li>
+        </ol>
+        <div class="mt-4 text-sm muted leading-snug">Also stores orders, refund policies and the agent's lessons (pgvector)</div>
+      </div>
+
+      <!-- (3,2) arrow: coach -> AlloyDB (left) -->
+      <div class="flex flex-col items-center justify-center px-3">
+        <div class="text-sm font-semibold text-center leading-tight">New instruction version</div>
+        <svg width="200" height="22" viewBox="0 0 200 22" class="my-2"><line x1="18" y1="11" x2="196" y2="11" stroke="currentColor" stroke-opacity=".45" stroke-width="2.5"/><path d="M20 4 L4 11 L20 18 Z" fill="currentColor" fill-opacity=".45"/></svg>
+        <div class="text-xs muted text-center leading-snug">only after it passes the test</div>
+      </div>
+
+      <!-- (3,3) Coach agent -->
+      <div class="rounded-xl p-5" style="background:rgba(161,66,244,.07); border:1.5px solid rgba(161,66,244,.5)">
+        <div class="flex items-center gap-3">
+          <div class="h-11 w-11 rounded-xl flex items-center justify-center" style="background:#A142F4">
+            <svg class="ico" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+          </div>
+          <div>
+            <div class="text-lg font-bold">Coach agent</div>
+            <div class="text-sm muted">ADK · scheduled Cloud Run Job</div>
+          </div>
+        </div>
+        <ol class="mt-4 space-y-3">
+          <li class="flex gap-3"><span class="step" style="background:#A142F4">4</span>
+            <div><div class="font-semibold">Suggest a fix</div><div class="text-sm muted leading-snug">1–2 new rules with the reason: which problem, how many chats, how many €</div></div></li>
+          <li class="flex gap-3"><span class="step" style="background:#A142F4">5</span>
+            <div><div class="font-semibold">Test</div><div class="text-sm muted leading-snug">Run test scenarios. Publish only if the agent got&nbsp;better</div></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHART + INSIGHT ============ -->
+  <section class="mt-6 grid gap-6" style="grid-template-columns: 1.15fr 1fr;">
+    <div class="surface rounded-2xl px-7 py-6">
+      <h2 class="text-xl font-bold">What the audience will see</h2>
+      <p class="text-sm muted mt-1">Share of successful chats for each instruction version</p>
+      <svg viewBox="0 0 540 250" class="w-full h-auto mt-3">
+        <g stroke="currentColor" stroke-opacity="0.12">
+          <line x1="50" y1="30" x2="525" y2="30"/>
+          <line x1="50" y1="72.5" x2="525" y2="72.5"/>
+          <line x1="50" y1="115" x2="525" y2="115"/>
+          <line x1="50" y1="157.5" x2="525" y2="157.5"/>
+          <line x1="50" y1="200" x2="525" y2="200"/>
+        </g>
+        <g fill="currentColor" fill-opacity="0.6" font-size="12" text-anchor="end">
+          <text x="42" y="34">100%</text>
+          <text x="42" y="119">50%</text>
+          <text x="42" y="204">0%</text>
+        </g>
+        <path d="M50 132 H208 V89.5 H366 V47 H525 V200 H50 Z" fill="#34A853" fill-opacity="0.13"/>
+        <g stroke="currentColor" stroke-opacity="0.35" stroke-dasharray="4 4">
+          <line x1="208" y1="22" x2="208" y2="200"/>
+          <line x1="366" y1="22" x2="366" y2="200"/>
+        </g>
+        <path d="M50 132 H208 V89.5 H366 V47 H525" fill="none" stroke="#34A853" stroke-width="3.5" stroke-linejoin="round"/>
+        <g font-size="15" font-weight="700" fill="#34A853" text-anchor="middle">
+          <text x="129" y="122">40%</text>
+          <text x="287" y="80">65%</text>
+          <text x="445" y="38">90%</text>
+        </g>
+        <g fill="currentColor" text-anchor="middle">
+          <text x="129" y="222" font-size="13" font-weight="700">v1</text>
+          <text x="287" y="222" font-size="13" font-weight="700">v2</text>
+          <text x="445" y="222" font-size="13" font-weight="700">v3</text>
+          <text x="129" y="240" font-size="12" fill-opacity="0.65">starting point</text>
+          <text x="287" y="240" font-size="12" fill-opacity="0.65">+ refund policy</text>
+          <text x="445" y="240" font-size="12" fill-opacity="0.65">+ order ID format</text>
+        </g>
+      </svg>
+      <div class="text-xs muted mt-2">We give v1 a few flaws on purpose. Each cycle fixes one of them.</div>
+    </div>
+
+    <div class="surface rounded-2xl px-7 py-6">
+      <h2 class="text-xl font-bold">Most common ≠ most expensive</h2>
+      <p class="text-sm muted mt-1">BigQuery joins agent data with CSAT and with refunds from AlloyDB</p>
+      <div class="mt-5 space-y-4">
+        <div class="rounded-xl p-4 hair">
+          <div class="flex justify-between items-baseline gap-3">
+            <div class="font-semibold">Asks the customer extra questions</div>
+            <div class="text-sm muted whitespace-nowrap">31% of chats</div>
+          </div>
+          <div class="mt-2 h-2.5 rounded-full" style="background:rgba(127,127,127,.16)"><div class="h-2.5 rounded-full" style="width:62%; background:#4285F4"></div></div>
+          <div class="mt-3 text-sm"><span class="muted">Cost:</span> lower CSAT</div>
+        </div>
+        <div class="rounded-xl p-4" style="border:1.5px solid rgba(234,67,53,.65); background:rgba(234,67,53,.06)">
+          <div class="flex justify-between items-baseline gap-3">
+            <div class="font-semibold">Breaks the refund policy</div>
+            <div class="text-sm muted whitespace-nowrap">18% of chats</div>
+          </div>
+          <div class="mt-2 h-2.5 rounded-full" style="background:rgba(127,127,127,.16)"><div class="h-2.5 rounded-full" style="width:36%; background:#4285F4"></div></div>
+          <div class="mt-3 flex items-center justify-between gap-3">
+            <div class="text-sm"><span class="muted">Cost:</span> <b style="color:#EA4335">€4,300 per week</b></div>
+            <span class="chip text-sm font-semibold text-white" style="background:#EA4335">Fix this first</span>
+          </div>
+        </div>
+      </div>
+      <div class="text-xs muted mt-4">The coach picks a problem by what it costs the business, not only by how often it happens.</div>
+    </div>
+  </section>
+
+  <!-- ============ WHY BIGQUERY ============ -->
+  <section class="surface rounded-2xl mt-6 px-8 py-7">
+    <div class="flex items-baseline justify-between">
+      <h2 class="text-2xl font-bold">Why BigQuery</h2>
+      <div class="text-sm muted">What an operational database alone can't give you</div>
+    </div>
+    <div class="mt-5 grid grid-cols-5 gap-4">
+      <div class="rounded-xl p-4" style="background:rgba(66,133,244,.06); border:1px solid rgba(66,133,244,.28)">
+        <div class="h-10 w-10 rounded-lg flex items-center justify-center" style="background:rgba(66,133,244,.15)">
+          <svg class="ico-c" viewBox="0 0 24 24" style="stroke:#4285F4"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>
+        </div>
+        <div class="mt-3 font-semibold leading-snug">Lots of agent data</div>
+        <div class="mt-1 text-sm muted leading-snug">Each <span class="mono">LLM_REQUEST</span> holds the full prompt and chat history. In production, that's terabytes</div>
+      </div>
+      <div class="rounded-xl p-4" style="background:rgba(66,133,244,.06); border:1px solid rgba(66,133,244,.28)">
+        <div class="h-10 w-10 rounded-lg flex items-center justify-center" style="background:rgba(66,133,244,.15)">
+          <svg class="ico-c" viewBox="0 0 24 24" style="stroke:#4285F4"><rect x="3" y="4" width="7.5" height="16" rx="2"/><rect x="13.5" y="4" width="7.5" height="16" rx="2"/></svg>
+        </div>
+        <div class="mt-3 font-semibold leading-snug">Analysis doesn't slow the agent</div>
+        <div class="mt-1 text-sm muted leading-snug">Heavy queries run on separate serverless compute, not on the operational database</div>
+      </div>
+      <div class="rounded-xl p-4" style="background:rgba(66,133,244,.06); border:1px solid rgba(66,133,244,.28)">
+        <div class="h-10 w-10 rounded-lg flex items-center justify-center" style="background:rgba(66,133,244,.15)">
+          <svg class="ico-c" viewBox="0 0 24 24" style="stroke:#4285F4"><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg>
+        </div>
+        <div class="mt-3 font-semibold leading-snug">LLMs right inside SQL</div>
+        <div class="mt-1 text-sm muted leading-snug"><span class="mono">AI.CLASSIFY</span>, <span class="mono">AI.SCORE</span>, <span class="mono">AI.GENERATE</span> over thousands of chats in one query</div>
+      </div>
+      <div class="rounded-xl p-4" style="background:rgba(66,133,244,.06); border:1px solid rgba(66,133,244,.28)">
+        <div class="h-10 w-10 rounded-lg flex items-center justify-center" style="background:rgba(66,133,244,.15)">
+          <svg class="ico-c" viewBox="0 0 24 24" style="stroke:#4285F4"><path d="M10 14a4 4 0 0 0 5.66 0l3-3a4 4 0 0 0-5.66-5.66l-1 1"/><path d="M14 10a4 4 0 0 0-5.66 0l-3 3a4 4 0 0 0 5.66 5.66l1-1"/></svg>
+        </div>
+        <div class="mt-3 font-semibold leading-snug">Link to business results</div>
+        <div class="mt-1 text-sm muted leading-snug">CSAT, CRM, refunds from AlloyDB through <span class="mono">EXTERNAL_QUERY</span>: how each chat really ended</div>
+      </div>
+      <div class="rounded-xl p-4" style="background:rgba(66,133,244,.06); border:1px solid rgba(66,133,244,.28)">
+        <div class="h-10 w-10 rounded-lg flex items-center justify-center" style="background:rgba(66,133,244,.15)">
+          <svg class="ico-c" viewBox="0 0 24 24" style="stroke:#4285F4"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        </div>
+        <div class="mt-3 font-semibold leading-snug">All agents in one place</div>
+        <div class="mt-1 text-sm muted leading-snug">One schema for all agents and models, shared access rules and PII masking</div>
+      </div>
+    </div>
+
+    <div class="mt-5 grid items-stretch gap-4" style="grid-template-columns: 1fr 220px 1fr;">
+      <div class="rounded-xl p-4" style="background:rgba(52,168,83,.07); border:1px solid rgba(52,168,83,.38)">
+        <div class="flex items-center gap-2 font-bold"><span class="inline-block h-3 w-3 rounded-full" style="background:#34A853"></span>AlloyDB — the agent works here</div>
+        <div class="mt-2 text-sm muted leading-snug">On every turn · transactions in milliseconds · current state: orders, instruction, lessons</div>
+      </div>
+      <div class="flex items-center justify-center text-center font-bold leading-snug px-2">Learn in BigQuery,<br>apply from AlloyDB</div>
+      <div class="rounded-xl p-4" style="background:rgba(66,133,244,.07); border:1px solid rgba(66,133,244,.38)">
+        <div class="flex items-center gap-2 font-bold"><span class="inline-block h-3 w-3 rounded-full" style="background:#4285F4"></span>BigQuery — the agent learns here</div>
+        <div class="mt-2 text-sm muted leading-snug">Across all history · scans in seconds · all agent experience plus business data</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DEMO TIMELINE ============ -->
+  <section class="surface rounded-2xl mt-6 px-8 py-7">
+    <div class="flex items-baseline justify-between flex-wrap gap-3">
+      <h2 class="text-2xl font-bold">Demo script · ~12 minutes</h2>
+      <div class="flex gap-5 text-sm">
+        <span class="flex items-center gap-2"><span class="inline-block h-3 w-3 rounded" style="background:#F9AB00"></span>Developer · IDE and agent code</span>
+        <span class="flex items-center gap-2"><span class="inline-block h-3 w-3 rounded" style="background:#4285F4"></span>Analyst · BigQuery Studio and SQL</span>
+        <span class="flex items-center gap-2"><span class="inline-block h-3 w-3 rounded" style="background:#A142F4"></span>Both</span>
+      </div>
+    </div>
+
+    <div class="mt-5 flex h-9 rounded-lg overflow-hidden font-bold text-sm">
+      <div class="seg flex items-center justify-center" style="flex:2; background:#F9AB00; color:#3d2c00">1</div>
+      <div class="seg flex items-center justify-center text-white" style="flex:1; background:#4285F4">2</div>
+      <div class="seg flex items-center justify-center text-white" style="flex:2; background:#4285F4">3</div>
+      <div class="seg flex items-center justify-center text-white" style="flex:2.5; background:#4285F4">4</div>
+      <div class="seg flex items-center justify-center text-white" style="flex:2.5; background:#A142F4">5</div>
+      <div class="seg flex items-center justify-center" style="flex:1; background:#F9AB00; color:#3d2c00">6</div>
+      <div class="seg flex items-center justify-center text-white" style="flex:1.5; background:#A142F4">7</div>
+    </div>
+
+    <div class="mt-4 grid grid-cols-7 gap-3">
+      <div class="rounded-xl p-3 hair" style="border-top:4px solid #F9AB00">
+        <div class="text-xs font-semibold muted">Act 1 · 2 min</div>
+        <div class="mt-1 font-semibold leading-snug">Agent in production</div>
+        <div class="mt-2 text-sm muted leading-snug">Agent code and a live chat: a refund for an old order</div>
+        <div class="mt-2 text-sm italic leading-snug">“What is it really doing?”</div>
+      </div>
+      <div class="rounded-xl p-3 hair" style="border-top:4px solid #4285F4">
+        <div class="text-xs font-semibold muted">Act 2 · 1 min</div>
+        <div class="mt-1 font-semibold leading-snug">No pipelines</div>
+        <div class="mt-2 text-sm muted leading-snug">The same chat shows up in <span class="mono">agent_events</span> in seconds</div>
+        <div class="mt-2 text-sm italic leading-snug">“One line of code, and I already have data”</div>
+      </div>
+      <div class="rounded-xl p-3 hair" style="border-top:4px solid #4285F4">
+        <div class="text-xs font-semibold muted">Act 3 · 2 min</div>
+        <div class="mt-1 font-semibold leading-snug">Scale and history</div>
+        <div class="mt-2 text-sm muted leading-snug">3 months of history: hundreds of millions of events in seconds</div>
+        <div class="mt-2 text-sm italic leading-snug">“These aren't just logs, it's a dataset”</div>
+      </div>
+      <div class="rounded-xl p-3 hair" style="border-top:4px solid #4285F4">
+        <div class="text-xs font-semibold muted">Act 4 · 2–3 min</div>
+        <div class="mt-1 font-semibold leading-snug">What hurts and what it costs</div>
+        <div class="mt-2 text-sm muted leading-snug"><span class="mono">AI.CLASSIFY</span> plus a join with CSAT and refunds</div>
+        <div class="mt-2 text-sm italic leading-snug">“Fix the most expensive first”</div>
+      </div>
+      <div class="rounded-xl p-3 hair" style="border-top:4px solid #A142F4">
+        <div class="text-xs font-semibold muted">Act 5 · 2–3 min</div>
+        <div class="mt-1 font-semibold leading-snug">Closing the loop</div>
+        <div class="mt-2 text-sm muted leading-snug">Coach: fix, test, publish v2</div>
+        <div class="mt-2 text-sm italic leading-snug">“I didn't deploy anything.” “And I didn't write any Python.”</div>
+      </div>
+      <div class="rounded-xl p-3 hair" style="border-top:4px solid #F9AB00">
+        <div class="text-xs font-semibold muted">Act 6 · 1 min</div>
+        <div class="mt-1 font-semibold leading-snug">Agent v2</div>
+        <div class="mt-2 text-sm muted leading-snug">Same request: now the agent checks the policy</div>
+        <div class="mt-2 text-sm italic leading-snug">“No redeploy”</div>
+      </div>
+      <div class="rounded-xl p-3 hair" style="border-top:4px solid #A142F4">
+        <div class="text-xs font-semibold muted">Act 7 · 1–2 min</div>
+        <div class="mt-1 font-semibold leading-snug">Wrap-up</div>
+        <div class="mt-2 text-sm muted leading-snug">Step-up chart, rollback, architecture</div>
+        <div class="mt-2 text-sm italic leading-snug">“Learn in BigQuery, apply from AlloyDB”</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="mt-6 rounded-2xl px-10 py-7 text-center" style="background:linear-gradient(90deg, rgba(66,133,244,.13), rgba(161,66,244,.11), rgba(52,168,83,.13)); border:1px solid var(--border, #e2e7ef)">
+    <div class="text-3xl font-bold">Developers ship the agent. Data makes it better.</div>
+    <div class="mt-2 text-sm muted">The model is not retrained — its context gets better: instructions and memory. All numbers here are illustrative.</div>
+  </footer>
+</div>
+
+<script>
+  (function () {
+    var poster = document.getElementById('poster');
+    function fit() {
+      var w = document.documentElement.clientWidth;
+      var s = Math.max(0.6, Math.min(1, (w - 24) / 1200));
+      poster.style.zoom = s;
+    }
+    window.addEventListener('resize', fit);
+    fit();
+    setTimeout(function () {
+      document.body.setAttribute('data-h', String(Math.ceil(document.documentElement.scrollHeight)));
+    }, 800);
+  })();
+</script>
+</body>
+</html>
